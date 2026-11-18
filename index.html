@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#09090b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="CART3R">
+<meta name="description" content="CART3R Mobile — a mobile Lua workspace and script library.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>CART3R Mobile</title>
+<style>
+:root{color-scheme:dark;--bg:#09090b;--panel:#121216;--line:#38202a;--red:#ff304f;--muted:#a99ba1;--text:#f7f1f3}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#36101c 0,transparent 45%),var(--bg);color:var(--text);font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh;padding:env(safe-area-inset-top) 14px calc(88px + env(safe-area-inset-bottom))}
+button,input,textarea{font:inherit}button{cursor:pointer;color:inherit;border:1px solid var(--line);background:#21151a;border-radius:13px;padding:12px 14px;font-weight:650}button:active{transform:scale(.98)}button.primary{background:linear-gradient(135deg,#e51e43,#8f102b);border-color:#ff4560}button.ghost{background:#151217}button.small{padding:8px 10px;font-size:12px;border-radius:10px}
+.top{display:flex;justify-content:space-between;align-items:center;padding:13px 2px 18px}.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.12em}.mark{width:35px;height:35px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(145deg,#ff3654,#720d25);box-shadow:0 0 22px #ff304f55;font-size:18px}.pill{font-size:10px;letter-spacing:.1em;color:#ff8294;border:1px solid #682335;padding:6px 9px;border-radius:99px}
+.hero{padding:19px;border:1px solid #652337;border-radius:21px;background:linear-gradient(145deg,#211016,#100e12 70%);box-shadow:0 12px 36px #0008}.eyebrow{color:#ff778d;font-size:10px;font-weight:800;letter-spacing:.18em}.hero h1{font-size:28px;margin:7px 0 4px;letter-spacing:.03em}.hero p,.muted{color:var(--muted);font-size:13px;line-height:1.5}.status{display:flex;align-items:center;gap:7px;color:#6fe0a0;font-size:11px;font-weight:800;margin-top:14px}.dot{width:7px;height:7px;background:#6fe0a0;border-radius:50%;box-shadow:0 0 10px #6fe0a0}
+.section{margin-top:20px}.section-head{display:flex;justify-content:space-between;align-items:center;margin:0 2px 10px}.section-head h2{font-size:13px;letter-spacing:.13em;margin:0}.section-head span{font-size:11px;color:var(--muted)}.card{background:var(--panel);border:1px solid #29232a;border-radius:17px;padding:15px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.tile{min-height:86px;text-align:left;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(145deg,#1b1218,#111115)}.tile b{font-size:13px}.tile small{color:var(--muted);font-size:11px}.tile .ico{font-size:19px;color:#ff657d}
+.editor-wrap{overflow:hidden;border-radius:16px;border:1px solid #3a2630;background:#08080a}.editorbar{display:flex;justify-content:space-between;align-items:center;padding:11px 12px;background:#171116;border-bottom:1px solid #34202a}.editorbar b{font-size:12px}.editorbar span{font-size:10px;color:#ff8092}.editor{width:100%;min-height:220px;resize:vertical;border:0;outline:0;background:#08080a;color:#f1dce2;padding:14px;font:13px/1.65 ui-monospace,SFMono-Regular,Menlo,monospace;tab-size:2}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.actions button{flex:1;min-width:105px}.field{width:100%;background:#0b0a0d;color:var(--text);border:1px solid #392630;border-radius:12px;padding:12px;outline:none}.field:focus,.editor-wrap:focus-within{border-color:#c52b4a;box-shadow:0 0 0 2px #c52b4a22}.script-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #29232a}.script-row:last-child{border:0}.script-row b{font-size:13px}.script-row small{display:block;color:var(--muted);font-size:11px;margin-top:4px}.console{font:12px/1.6 ui-monospace,monospace;color:#b6eac9;min-height:70px;white-space:pre-wrap;overflow-wrap:anywhere}.notice{border:1px solid #5c2636;background:#1e1016;color:#ffb3c0;padding:11px 12px;border-radius:12px;font-size:12px;line-height:1.5}.nav{position:fixed;z-index:5;bottom:0;left:0;right:0;padding:9px 10px calc(9px + env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(4,1fr);gap:5px;background:#0c0b0ff2;border-top:1px solid #34212a;backdrop-filter:blur(18px)}.nav button{border:0;background:transparent;color:#9e8f96;padding:8px 3px;font-size:10px}.nav button.active{color:#ff6079;background:#281019}.nav .navico{display:block;font-size:17px;margin-bottom:4px}.page{display:none}.page.active{display:block}.empty{color:var(--muted);text-align:center;padding:20px;font-size:12px}.label{display:block;font-size:11px;color:#d8c5cb;margin:12px 0 7px}.row{display:flex;gap:8px;align-items:center}.row>*{min-width:0}.row .field{flex:1}
+@media(min-width:650px){body{max-width:720px;margin:auto;padding-left:22px;padding-right:22px}.hero h1{font-size:34px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="brand"><div class="mark">C</div><span>CART3R<span style="color:var(--red)">.</span>MOBILE</span></div><span class="pill">IOS WORKSPACE</span></header>
+<main>
+<section id="home" class="page active">
+<div class="hero"><div class="eyebrow">MOBILE DEVELOPER WORKSPACE</div><h1>COMMAND CENTER</h1><p>A pocket-sized Lua editor, script library and learning workspace. Built for iPhone Safari.</p><div class="status"><i class="dot"></i> LOCAL WORKSPACE READY</div></div>
+<div class="section"><div class="section-head"><h2>QUICK ACCESS</h2><span>V1.0.0</span></div><div class="grid">
+<button class="tile" data-go="editor"><span class="ico">⌘</span><b>Lua Editor</b><small>Write and copy code</small></button>
+<button class="tile" data-go="library"><span class="ico">▤</span><b>Script Library</b><small>Save local snippets</small></button>
+<button class="tile" data-go="console"><span class="ico">›_</span><b>Console</b><small>View local messages</small></button>
+<button class="tile" data-go="settings"><span class="ico">⚙</span><b>Settings</b><small>App preferences</small></button>
+</div></div>
+<div class="section"><div class="section-head"><h2>IMPORTANT</h2><span>READ FIRST</span></div><div class="notice">This is a standalone coding workspace, not a Roblox executor. It does not inject code into Roblox, alter game clients, bypass bans, or run scripts inside DEGRADE or other live games. Use Roblox Studio to test scripts in experiences you own or are authorized to edit.</div></div>
+</section>
+<section id="editor" class="page">
+<div class="section-head"><h2>LUA EDITOR</h2><span>TEXT WORKSPACE</span></div>
+<div class="editor-wrap"><div class="editorbar"><b>untitled.lua</b><span>● LOCAL</span></div><textarea id="code" class="editor" spellcheck="false" autocapitalize="off" autocomplete="off">-- CART3R Mobile
+-- Write Lua code here
+
+print("Hello from CART3R!")</textarea></div>
+<div class="actions"><button class="primary" id="copyCode">Copy code</button><button id="saveCode">Save snippet</button><button class="ghost" id="clearCode">Clear</button></div>
+<div class="section"><div class="notice">The editor stores and copies text only. It does not execute code in Roblox or connect to game servers.</div></div>
+</section>
+<section id="library" class="page">
+<div class="section-head"><h2>SCRIPT LIBRARY</h2><span id="scriptCount">0 SAVED</span></div>
+<div class="card"><label class="label" for="scriptName">SNIPPET NAME</label><input id="scriptName" class="field" placeholder="e.g. Welcome message"><div class="actions"><button class="primary" id="saveNamed">Save current editor</button></div></div>
+<div class="section card" id="scriptList"><div class="empty">No saved snippets yet. Save one from the editor.</div></div>
+<div class="muted">Snippets are stored locally in this browser on this device.</div>
+</section>
+<section id="console" class="page">
+<div class="section-head"><h2>LOCAL CONSOLE</h2><span>APP EVENTS</span></div>
+<div class="card"><div id="consoleOutput" class="console">[CART3R] Workspace initialized.
+[INFO] No connection to Roblox game servers.</div><div class="actions"><button id="consoleTest">Run local test</button><button class="ghost" id="clearConsole">Clear console</button></div></div>
+</section>
+<section id="settings" class="page">
+<div class="section-head"><h2>SETTINGS</h2><span>CONFIGURATION</span></div>
+<div class="card">
+<div class="script-row"><div><b>Theme</b><small>Black / crimson</small></div><span class="pill">DEFAULT</span></div>
+<div class="script-row"><div><b>Storage</b><small>Browser local storage</small></div><span>⌂</span></div>
+<div class="script-row"><div><b>Version</b><small>CART3R Mobile 1.0.0</small></div><span>1.0.0</span></div>
+<div class="script-row"><div><b>Install</b><small>Safari → Share → Add to Home Screen</small></div><span>＋</span></div>
+<div class="actions"><button class="ghost" id="exportData">Export snippets</button><button class="ghost" id="resetData">Clear saved data</button></div>
+</div>
+<div class="section notice">Privacy: saved snippets remain in this browser unless you export or clear them. Do not store passwords, private keys or account tokens here.</div>
+</section>
+</main>
+<nav class="nav" aria-label="Main navigation">
+<button class="active" data-go="home"><span class="navico">⌂</span>Home</button>
+<button data-go="editor"><span class="navico">⌘</span>Editor</button>
+<button data-go="library"><span class="navico">▤</span>Library</button>
+<button data-go="settings"><span class="navico">⚙</span>Settings</button>
+</nav>
+<script>
+(()=> {
+const $=id=>document.getElementById(id),pages=[...document.querySelectorAll('.page')],nav=[...document.querySelectorAll('.nav button')],code=$('code');
+const log=m=>{$('consoleOutput').textContent+=`\\n${new Date().toLocaleTimeString()} ${m}`};
+function go(n){pages.forEach(p=>p.classList.toggle('active',p.id===n));nav.forEach(b=>b.classList.toggle('active',b.dataset.go===n));window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));
+const get=()=>{try{return JSON.parse(localStorage.getItem('cart3r_scripts')||'[]')}catch{return []}},set=a=>localStorage.setItem('cart3r_scripts',JSON.stringify(a));
+async function copy(t){try{await navigator.clipboard.writeText(t);alert('Copied to clipboard!');log('Copied text.')}catch{code.focus();code.select();document.execCommand('copy');alert('Select and copy manually if needed.');}}
+$('copyCode').onclick=()=>copy(code.value);
+$('clearCode').onclick=()=>{if(confirm('Clear the editor?'))code.value=''};
+function save(name){let a=get();a.unshift({id:Date.now(),name:name||'Untitled snippet',code:code.value,created:new Date().toISOString()});set(a);render();log('Saved snippet: '+(name||'Untitled snippet'));alert('Snippet saved on this device.')}
+$('saveCode').onclick=()=>save('Untitled snippet');
+$('saveNamed').onclick=()=>{let n=$('scriptName').value.trim();if(!n){alert('Enter a snippet name first.');return}save(n);$('scriptName').value=''};
+function render(){let a=get();$('scriptCount').textContent=a.length+' SAVED';let list=$('scriptList');list.innerHTML='';if(!a.length){list.innerHTML='<div class="empty">No saved snippets yet. Save one from the editor.</div>';return}a.forEach(s=>{let row=document.createElement('div');row.className='script-row';let info=document.createElement('div'),title=document.createElement('b'),meta=document.createElement('small');title.textContent=s.name;meta.textContent=new Date(s.created).toLocaleString();info.append(title,meta);let actions=document.createElement('div');actions.className='row';let load=document.createElement('button');load.className='small';load.textContent='Load';load.onclick=()=>{code.value=s.code;go('editor');log('Loaded snippet: '+s.name)};let del=document.createElement('button');del.className='small ghost';del.textContent='Delete';del.onclick=()=>{if(confirm('Delete '+s.name+'?')){set(get().filter(x=>x.id!==s.id));render();log('Deleted snippet.')}};actions.append(load,del);row.append(info,actions);list.append(row)})}
+$('consoleTest').onclick=()=>log('Local workspace test passed.');
+$('clearConsole').onclick=()=>$('consoleOutput').textContent='[CART3R] Console cleared.';
+$('exportData').onclick=()=>{let blob=new Blob([JSON.stringify(get(),null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='cart3r-snippets.json';a.click();URL.revokeObjectURL(url);log('Exported snippets.')};
+$('resetData').onclick=()=>{if(confirm('Permanently clear all locally saved snippets?')){localStorage.removeItem('cart3r_scripts');render();log('Local snippets cleared.')}};
+render();
+if('serviceWorker'in navigator&&location.protocol.startsWith('http'))addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+})();
+</script>
+</body></html>
